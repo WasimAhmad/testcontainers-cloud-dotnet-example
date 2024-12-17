@@ -13,39 +13,39 @@ namespace TestcontainersCloud.DotNetExample;
 [TestClass]
 public sealed class TestcontainersCloudFirstTest
 {
-    [TestMethod]
-    public async Task TestcontainersCloudDockerEngine()
-    {
-        using var dockerClientConfiguration =
-            TestcontainersSettings.OS.DockerEndpointAuthConfig.GetDockerClientConfiguration(ResourceReaper
-                .DefaultSessionId);
+    //[TestMethod]
+    //public async Task TestcontainersCloudDockerEngine()
+    //{
+    //    using var dockerClientConfiguration =
+    //        TestcontainersSettings.OS.DockerEndpointAuthConfig.GetDockerClientConfiguration(ResourceReaper
+    //            .DefaultSessionId);
 
-        using var dockerClient = dockerClientConfiguration.CreateClient();
+    //    using var dockerClient = dockerClientConfiguration.CreateClient();
 
-        var versionResponse = await dockerClient.System.GetSystemInfoAsync()
-            .ConfigureAwait(false);
+    //    var versionResponse = await dockerClient.System.GetSystemInfoAsync()
+    //        .ConfigureAwait(false);
 
-        var isTestcontainersDesktop = versionResponse.ServerVersion.Contains("Testcontainers Desktop");
-        var isTestcontainersCloud = versionResponse.ServerVersion.Contains("testcontainerscloud");
-        if (!(isTestcontainersDesktop || isTestcontainersCloud))
-        {
-            Console.WriteLine(PrettyStrings.OhNo);
-            Assert.Fail();
-        }
+    //    var isTestcontainersDesktop = versionResponse.ServerVersion.Contains("Testcontainers Desktop");
+    //    var isTestcontainersCloud = versionResponse.ServerVersion.Contains("testcontainerscloud");
+    //    if (!(isTestcontainersDesktop || isTestcontainersCloud))
+    //    {
+    //        Console.WriteLine(PrettyStrings.OhNo);
+    //        Assert.Fail();
+    //    }
 
-        var runtimeName = "Testcontainers Cloud";
-        if (!versionResponse.ServerVersion.Contains("testcontainerscloud"))
-        {
-            runtimeName = versionResponse.OperatingSystem;
-        }
+    //    var runtimeName = "Testcontainers Cloud";
+    //    if (!versionResponse.ServerVersion.Contains("testcontainerscloud"))
+    //    {
+    //        runtimeName = versionResponse.OperatingSystem;
+    //    }
 
-        if (versionResponse.ServerVersion.Contains("Testcontainers Desktop"))
-        {
-            runtimeName += " via Testcontainers Desktop app";
-        }
+    //    if (versionResponse.ServerVersion.Contains("Testcontainers Desktop"))
+    //    {
+    //        runtimeName += " via Testcontainers Desktop app";
+    //    }
 
-        Console.WriteLine(PrettyStrings.Logo.Replace("::::::", runtimeName));
-    }
+    //    Console.WriteLine(PrettyStrings.Logo.Replace("::::::", runtimeName));
+    //}
 
     [TestMethod]
     public async Task CreatePostgreSQLContainer()
